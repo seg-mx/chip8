@@ -45,6 +45,10 @@ impl Screen {
         self.to_change.insert((x, y), pixel);
     }
 
+    pub fn clear(&mut self) {
+        self.pixels = [[false; SCREEN_WIDTH]; SCREEN_HEIGHT];
+    }
+
     pub fn draw<W>(&self, w: &mut W) -> Result<()>
     where
         W: Write,
