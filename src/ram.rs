@@ -4,6 +4,7 @@ pub const ROM_START_ADDRESS: usize = 0x200;
 pub struct Ram {
     bytes: [u8; RAM_SIZE],
     pc: u16,
+    i_register: u16,
 }
 
 impl Ram {
@@ -11,6 +12,7 @@ impl Ram {
         Self {
             bytes: [0; RAM_SIZE],
             pc: ROM_START_ADDRESS as u16,
+            i_register: 0,
         }
     }
 
@@ -52,5 +54,13 @@ impl Ram {
 
     pub fn get_pc(&self) -> u16 {
         self.pc
+    }
+
+    pub fn set_i_register(&mut self, address: u16) {
+        self.i_register = address;
+    }
+
+    pub fn get_i_register(&self) -> u16 {
+        self.i_register
     }
 }
