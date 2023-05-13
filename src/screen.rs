@@ -9,8 +9,8 @@ use crossterm::{
     style::{Print, Stylize},
 };
 
-const SCREEN_WIDTH: usize = 64;
-const SCREEN_HEIGHT: usize = 32;
+pub const SCREEN_WIDTH: usize = 64;
+pub const SCREEN_HEIGHT: usize = 32;
 
 pub struct Screen {
     pixels: [[bool; SCREEN_WIDTH]; SCREEN_HEIGHT],
@@ -38,6 +38,10 @@ impl Screen {
                 " ".on_black()
             })
         )
+    }
+
+    pub fn get_pixel(&mut self, x: usize, y: usize) -> bool {
+        self.pixels[y][x]
     }
 
     pub fn set_pixel(&mut self, x: usize, y: usize, pixel: bool) {
