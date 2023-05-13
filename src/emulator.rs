@@ -1,10 +1,11 @@
 use std::io::{Result, Write};
 
-use crate::{config::Config, quit, ram::Ram, screen::Screen};
+use crate::{config::Config, opcode::OpcodeManager, quit, ram::Ram, screen::Screen};
 
 pub struct Emulator {
     pub ram: Ram,
     pub screen: Screen,
+    pub opcode_manager: Option<OpcodeManager>,
     pub config: Config,
 }
 
@@ -16,6 +17,7 @@ impl Emulator {
         let mut emulator = Self {
             ram: Ram::new(),
             screen: Screen::new(),
+            opcode_manager: Some(OpcodeManager::new()),
             config,
         };
 
@@ -32,6 +34,15 @@ impl Emulator {
         W: Write,
     {
         let code = self.ram.fetch();
+
+        let mut manager = self
+            .opcode_manager
+            .take()
+            .expect("OpcodeManager should never be a none variant in this context");
+
+        manager.execute(code, self);
+
+        self.opcode_manager = Some(manager);
         self.screen.redraw(w)
     }
 }
