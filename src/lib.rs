@@ -12,6 +12,7 @@ use crossterm::{
 
 pub mod config;
 pub mod emulator;
+pub mod opcode;
 pub mod ram;
 pub mod screen;
 
