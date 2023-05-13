@@ -1,4 +1,4 @@
-use crate::emulator::Emulator;
+use crate::{emulator::Emulator, opcodes::*};
 
 pub trait Opcode {
     fn decode(&self, code: u16) -> (u8, u8, u8, u8) {
@@ -14,12 +14,14 @@ pub trait Opcode {
 }
 
 pub struct OpcodeManager {
-    opcodes: [Box<dyn Opcode>; 0],
+    opcodes: [Box<dyn Opcode>; 1],
 }
 
 impl OpcodeManager {
     pub fn new() -> Self {
-        Self { opcodes: [] }
+        Self {
+            opcodes: [Box::new(ClearScreen)],
+        }
     }
 
     pub fn execute(&mut self, code: u16, emulator: &mut Emulator) {
