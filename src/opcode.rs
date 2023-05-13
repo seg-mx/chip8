@@ -14,7 +14,7 @@ pub trait Opcode {
 }
 
 pub struct OpcodeManager {
-    opcodes: [Box<dyn Opcode>; 3],
+    opcodes: [Box<dyn Opcode>; 4],
 }
 
 impl OpcodeManager {
@@ -24,6 +24,7 @@ impl OpcodeManager {
                 Box::new(ClearScreen),
                 Box::new(SetIRegister),
                 Box::new(SetVRegister),
+                Box::new(Draw),
             ],
         }
     }
