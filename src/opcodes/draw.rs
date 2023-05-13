@@ -13,9 +13,11 @@ impl Opcode for Draw {
             return Err(());
         };
 
-        emulator.ram.set(second as usize, (code & 0x00FF) as u8);
-
         emulator.ram.set(0xF, 0);
+
+        let second = emulator.ram.get(second as usize) as u16;
+        let third = emulator.ram.get(third as usize) as u16;
+        let rows = rows as u16;
 
         for y in 0..rows {
             let addr = emulator.ram.get_i_register() + y as u16;
