@@ -14,13 +14,13 @@ pub trait Opcode {
 }
 
 pub struct OpcodeManager {
-    opcodes: [Box<dyn Opcode>; 1],
+    opcodes: [Box<dyn Opcode>; 2],
 }
 
 impl OpcodeManager {
     pub fn new() -> Self {
         Self {
-            opcodes: [Box::new(ClearScreen)],
+            opcodes: [Box::new(ClearScreen), Box::new(SetIRegister)],
         }
     }
 
