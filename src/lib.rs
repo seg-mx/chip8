@@ -21,6 +21,7 @@ pub mod opcode;
 pub mod opcodes;
 pub mod ram;
 pub mod screen;
+pub mod stack;
 
 pub fn run<W>(mut emulator: Emulator, output: &mut W) -> Result<()>
 where
