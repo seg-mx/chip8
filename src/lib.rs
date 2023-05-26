@@ -7,6 +7,7 @@ use std::{
 
 use crossterm::{
     cursor::{Hide, Show},
+    event::{KeyboardEnhancementFlags, PopKeyboardEnhancementFlags, PushKeyboardEnhancementFlags},
     execute,
     terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
@@ -68,7 +69,12 @@ pub fn setup<W>(output: &mut W) -> Result<()>
 where
     W: Write,
 {
-    execute!(output, EnterAlternateScreen, Hide)?;
+    execute!(
+        output,
+        EnterAlternateScreen,
+        PushKeyboardEnhancementFlags(KeyboardEnhancementFlags::all()),
+        Hide,
+    )?;
     enable_raw_mode()
 }
 
@@ -76,6 +82,11 @@ pub fn restore<W>(output: &mut W) -> Result<()>
 where
     W: Write,
 {
-    execute!(output, LeaveAlternateScreen, Show)?;
+    execute!(
+        output,
+        PopKeyboardEnhancementFlags,
+        LeaveAlternateScreen,
+        Show
+    )?;
     disable_raw_mode()
 }
