@@ -14,7 +14,7 @@ pub trait Opcode {
 }
 
 pub struct OpcodeManager {
-    opcodes: [Box<dyn Opcode>; 8],
+    opcodes: [Box<dyn Opcode>; 9],
 }
 
 impl OpcodeManager {
@@ -29,6 +29,7 @@ impl OpcodeManager {
                 Box::new(Jump),
                 Box::new(Call),
                 Box::new(XMinusYRegisters),
+                Box::new(ReturnSubroutine),
             ],
         }
     }
