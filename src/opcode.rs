@@ -14,7 +14,7 @@ pub trait Opcode {
 }
 
 pub struct OpcodeManager {
-    opcodes: [Box<dyn Opcode>; 14],
+    opcodes: [Box<dyn Opcode>; 15],
 }
 
 impl OpcodeManager {
@@ -35,6 +35,7 @@ impl OpcodeManager {
                 Box::new(StoreFromZeroToXRegisters),
                 Box::new(SkipIfXEquals),
                 Box::new(SetXToRandom),
+                Box::new(SkipIfXNotEquals),
             ],
         }
     }
