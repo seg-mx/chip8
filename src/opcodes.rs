@@ -1,4 +1,5 @@
 mod add;
+mod add_to_i_register;
 mod call;
 mod clear_screen;
 mod draw;
@@ -10,6 +11,7 @@ mod set_x_to_y_registers;
 mod x_minus_y_registers;
 
 pub use add::Add;
+pub use add_to_i_register::AddToIRegister;
 pub use call::Call;
 pub use clear_screen::ClearScreen;
 pub use draw::Draw;
