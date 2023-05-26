@@ -6,6 +6,7 @@ mod jump;
 mod return_subroutine;
 mod set_i_register;
 mod set_v_register;
+mod set_x_to_y_registers;
 mod x_minus_y_registers;
 
 pub use add::Add;
@@ -16,4 +17,5 @@ pub use jump::Jump;
 pub use return_subroutine::ReturnSubroutine;
 pub use set_i_register::SetIRegister;
 pub use set_v_register::SetVRegister;
+pub use set_x_to_y_registers::SetXToYRegisters;
 pub use x_minus_y_registers::XMinusYRegisters;
