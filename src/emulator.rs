@@ -1,11 +1,15 @@
 use std::io::{Result, Write};
 
-use crate::{config::Config, opcode::OpcodeManager, quit, ram::Ram, screen::Screen, stack::Stack};
+use crate::{
+    config::Config, keypad::Keypad, opcode::OpcodeManager, quit, ram::Ram, screen::Screen,
+    stack::Stack,
+};
 
 pub struct Emulator {
     pub ram: Ram,
     pub screen: Screen,
     pub opcode_manager: Option<OpcodeManager>,
+    pub keypad: Keypad,
     pub stack: Stack,
     pub config: Config,
 }
@@ -19,6 +23,7 @@ impl Emulator {
             ram: Ram::new(),
             screen: Screen::new(),
             opcode_manager: Some(OpcodeManager::new()),
+            keypad: Keypad::new(),
             stack: Stack::new(),
             config,
         };

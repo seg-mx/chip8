@@ -17,6 +17,7 @@ use event_handler::handle_event;
 pub mod config;
 pub mod emulator;
 pub mod event_handler;
+pub mod keypad;
 pub mod opcode;
 pub mod opcodes;
 pub mod ram;
