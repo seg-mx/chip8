@@ -1,4 +1,4 @@
-const NUMBER_OF_KEYS: usize = 16;
+pub const NUMBER_OF_KEYS: usize = 16;
 
 pub struct Keypad {
     keys: [bool; NUMBER_OF_KEYS],
