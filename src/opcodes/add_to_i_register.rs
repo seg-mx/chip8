@@ -10,7 +10,8 @@ impl Opcode for AddToIRegister {
         };
 
         let i = emulator.ram.get_i_register();
-        let result = i.wrapping_add(second as u16);
+        let x = emulator.ram.get(second as usize);
+        let result = i.wrapping_add(x as u16);
         emulator.ram.set_i_register(result);
 
         Ok(())
