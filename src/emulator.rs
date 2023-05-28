@@ -11,6 +11,7 @@ pub struct Emulator {
     pub opcode_manager: Option<OpcodeManager>,
     pub keypad: Keypad,
     pub stack: Stack,
+    pub delay_timer: u8,
     pub config: Config,
 }
 
@@ -25,6 +26,7 @@ impl Emulator {
             opcode_manager: Some(OpcodeManager::new()),
             keypad: Keypad::new(),
             stack: Stack::new(),
+            delay_timer: 0,
             config,
         };
 
@@ -51,5 +53,11 @@ impl Emulator {
 
         self.opcode_manager = Some(manager);
         self.screen.redraw(w)
+    }
+
+    pub fn tick_timers(&mut self) {
+        if self.delay_timer > 0 {
+            self.delay_timer -= 1;
+        }
     }
 }
