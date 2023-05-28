@@ -12,6 +12,7 @@ pub struct Emulator {
     pub keypad: Keypad,
     pub stack: Stack,
     pub delay_timer: u8,
+    pub sound_timer: u8,
     pub config: Config,
 }
 
@@ -27,6 +28,7 @@ impl Emulator {
             keypad: Keypad::new(),
             stack: Stack::new(),
             delay_timer: 0,
+            sound_timer: 0,
             config,
         };
 
@@ -58,6 +60,10 @@ impl Emulator {
     pub fn tick_timers(&mut self) {
         if self.delay_timer > 0 {
             self.delay_timer -= 1;
+        }
+
+        if self.sound_timer > 0 {
+            self.sound_timer -= 1;
         }
     }
 }
