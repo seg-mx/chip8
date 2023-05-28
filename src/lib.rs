@@ -30,6 +30,11 @@ where
     W: Write,
 {
     let mut last_tick = Instant::now();
+    let mut last_frame_tick = Instant::now();
+
+    const SECOND_IN_NANOS: u64 = 1_000_000_000;
+    const FRAMES_PER_SECOND: u64 = 60;
+    let frame_tick_rate = Duration::from_nanos(SECOND_IN_NANOS / FRAMES_PER_SECOND);
 
     loop {
         let timeout = emulator
@@ -41,6 +46,11 @@ where
         if last_tick.elapsed() >= emulator.config.tick_rate {
             emulator.tick(output)?;
             last_tick = Instant::now();
+        }
+
+        if last_frame_tick.elapsed() >= frame_tick_rate {
+            emulator.tick_timers();
+            last_frame_tick = Instant::now();
         }
 
         if handle_event(timeout, &mut emulator, output)? {
