@@ -14,7 +14,7 @@ pub trait Opcode {
 }
 
 pub struct OpcodeManager {
-    opcodes: [Box<dyn Opcode>; 25],
+    opcodes: [Box<dyn Opcode>; 26],
 }
 
 impl OpcodeManager {
@@ -46,6 +46,7 @@ impl OpcodeManager {
                 Box::new(SkipIfKeyIsPressed),
                 Box::new(SkipIfKeyIsNotPressed),
                 Box::new(JumpToZeroPlusNumber),
+                Box::new(SkipIfXEqualsY),
             ],
         }
     }
