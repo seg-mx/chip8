@@ -14,7 +14,7 @@ pub trait Opcode {
 }
 
 pub struct OpcodeManager {
-    opcodes: [Box<dyn Opcode>; 24],
+    opcodes: [Box<dyn Opcode>; 25],
 }
 
 impl OpcodeManager {
@@ -45,6 +45,7 @@ impl OpcodeManager {
                 Box::new(SetXRegisterToDelayTimer),
                 Box::new(SkipIfKeyIsPressed),
                 Box::new(SkipIfKeyIsNotPressed),
+                Box::new(JumpToZeroPlusNumber),
             ],
         }
     }
