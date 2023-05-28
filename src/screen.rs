@@ -15,6 +15,7 @@ pub const SCREEN_HEIGHT: usize = 32;
 pub struct Screen {
     pixels: [[bool; SCREEN_WIDTH]; SCREEN_HEIGHT],
     to_change: HashMap<(usize, usize), bool>,
+    do_draw: bool,
 }
 
 impl Screen {
@@ -22,6 +23,7 @@ impl Screen {
         Self {
             pixels: [[false; SCREEN_WIDTH]; SCREEN_HEIGHT],
             to_change: HashMap::new(),
+            do_draw: false,
         }
     }
 
@@ -51,6 +53,7 @@ impl Screen {
 
     pub fn clear(&mut self) {
         self.pixels = [[false; SCREEN_WIDTH]; SCREEN_HEIGHT];
+        self.do_draw = true;
     }
 
     pub fn draw<W>(&self, w: &mut W) -> Result<()>
@@ -72,6 +75,12 @@ impl Screen {
     where
         W: Write,
     {
+        if self.do_draw {
+            self.draw(w)?;
+            self.do_draw = false;
+            return Ok(());
+        }
+
         if self.to_change.is_empty() {
             return Ok(());
         }
